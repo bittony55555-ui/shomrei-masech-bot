@@ -2,55 +2,129 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8">
-<title>בוט מילה טובה</title>
+<title>שומרי מסך חטיבת נופר 🌱</title>
+
 <style>
-  body { font-family: Arial; text-align: center; padding: 50px; }
-  #question { font-size: 20px; margin: 20px; }
-  #response { font-size: 18px; margin: 20px; color: green; }
-  input, button { padding: 10px; font-size: 16px; margin: 5px; }
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e6f4f1, #f9fdfc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+h1 {
+  margin-top: 0;
+  color: #2e7d6b;
+}
+
+.question {
+  font-size: 20px;
+  margin: 25px 0;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  background: #2e7d6b;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #25685a;
+}
+
+.response {
+  margin-top: 15px;
+  color: #2e7d6b;
+  font-weight: bold;
+}
+
+.footer {
+  margin-top: 25px;
+  font-size: 13px;
+  color: #888;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
+
 <body>
 
-<h1>בוט מילה טובה 🌱</h1>
+<div class="card">
+  <h1>🌱 מילה טובה</h1>
 
-<div id="question">לחץ על הכפתור לקבלת שאלה</div>
+  <div class="question" id="question">
+    לחץ על הכפתור כדי לקבל שאלה
+  </div>
 
-<button onclick="nextQuestion()">שאלה חדשה</button>
+  <input type="text" id="answer" placeholder="אפשר לכתוב כאן מחשבה קטנה…">
 
-<div>
-    <input type="text" id="answerBox" placeholder="כתוב כאן את התשובה שלך...">
-    <button onclick="sendAnswer()">שלח</button>
+  <button onclick="nextQuestion()">שאלה חדשה</button>
+
+  <div class="response" id="response"></div>
+
+  <div class="footer">
+    שומרי מסך · חטיבת נופר
+  </div>
 </div>
-
-<div id="response"></div>
 
 <script>
 const questions = [
-    "האם עשית משהו טוב היום? 🌟",
-    "האם עזרת לחבר היום? 🤝",
-    "פירגנת למישהו היום על משהו? 💛",
-    "אמרת תודה למישהו היום? 🙏",
-    "שלחת מילה טובה למישהו היום? 💬"
+  "האם פירגנת היום למישהו על משהו?",
+  "אמרת תודה למישהו היום?",
+  "עזרת לחבר או חברה היום?",
+  "שמחת מישהו במילה טובה?",
+  "עשית היום מעשה קטן שעשה טוב?"
 ];
 
 function nextQuestion() {
-    const randomIndex = Math.floor(Math.random() * questions.length);
-    const question = questions[randomIndex];
-    document.getElementById("question").innerText = question;
-    document.getElementById("response").innerText = "";
-    document.getElementById("answerBox").value = "";
+  const q = questions[Math.floor(Math.random() * questions.length)];
+  document.getElementById("question").innerText = q;
+  document.getElementById("response").innerText = "";
+  document.getElementById("answer").value = "";
 }
 
-function sendAnswer() {
-    const answer = document.getElementById("answerBox").value.trim();
-    if(answer === "") {
-        document.getElementById("response").innerText = "נא לכתוב משהו קודם 😅";
-        return;
-    }
-    document.getElementById("response").innerText = "יופי! 🌟 תודה ששיתפת את זה!";
-    document.getElementById("answerBox").value = "";
-}
+document.getElementById("answer").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    document.getElementById("response").innerText =
+      "איזה יופי 🌸 תודה שעצרת רגע לחשוב על זה";
+    this.value = "";
+  }
+});
 </script>
 
 </body>
